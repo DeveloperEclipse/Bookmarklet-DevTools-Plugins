@@ -20,11 +20,6 @@
     runBtn.textContent = 'Run';
     runBtn.style.cssText = 'padding: 6px 16px; background: var(--devtools-success); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;';
     
-    // Beautify button
-    const beautifyBtn = document.createElement('button');
-    beautifyBtn.textContent = 'Beautify';
-    beautifyBtn.style.cssText = 'padding: 6px 16px; background: var(--devtools-accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;';
-    
     // Clear button
     const clearBtn = document.createElement('button');
     clearBtn.textContent = 'Clear';
@@ -36,7 +31,6 @@
     copyBtn.style.cssText = 'padding: 6px 16px; background: var(--devtools-bg-tertiary); color: var(--devtools-text-primary); border: 1px solid var(--devtools-border); border-radius: 4px; cursor: pointer; font-size: 12px;';
     
     toolbar.appendChild(runBtn);
-    toolbar.appendChild(beautifyBtn);
     toolbar.appendChild(clearBtn);
     toolbar.appendChild(copyBtn);
     
@@ -97,46 +91,6 @@
             codeDisplay.textContent = codeInput.value;
         }
         updateLineNumbers();
-    }
-    
-    // Beautify code
-    function beautifyCode(code) {
-        let indent = 0;
-        let beautified = '';
-        let inString = false;
-        let stringChar = '';
-        
-        for (let i = 0; i < code.length; i++) {
-            const char = code[i];
-            const prevChar = code[i - 1];
-            
-            if ((char === '"' || char === "'" || char === '`') && prevChar !== '\\') {
-                if (!inString) {
-                    inString = true;
-                    stringChar = char;
-                } else if (char === stringChar) {
-                    inString = false;
-                }
-                beautified += char;
-                continue;
-            }
-            
-            if (!inString) {
-                if (char === '{' || char === '[') {
-                    beautified += char + '\n' + '    '.repeat(++indent);
-                } else if (char === '}' || char === ']') {
-                    beautified = beautified.trimEnd() + '\n' + '    '.repeat(--indent) + char;
-                } else if (char === ';') {
-                    beautified += char + '\n' + '    '.repeat(indent);
-                } else {
-                    beautified += char;
-                }
-            } else {
-                beautified += char;
-            }
-        }
-        
-        return beautified.split('\n').map(line => line.trimEnd()).filter(line => line).join('\n');
     }
     
     // Execute code
@@ -218,11 +172,6 @@
     });
     
     runBtn.addEventListener('click', executeCode);
-    
-    beautifyBtn.addEventListener('click', () => {
-        codeInput.value = beautifyCode(codeInput.value);
-        updateHighlighting();
-    });
     
     clearBtn.addEventListener('click', () => {
         codeInput.value = '';
