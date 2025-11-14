@@ -94,10 +94,6 @@
     clearBtn.textContent = 'Clear History';
     clearBtn.style.cssText = 'padding: 8px 16px; background: var(--devtools-bg-tertiary); color: var(--devtools-text-primary); border: 1px solid var(--devtools-border); border-radius: 4px; cursor: pointer; font-size: 12px;';
     
-    const gcBtn = document.createElement('button');
-    gcBtn.textContent = 'Force GC';
-    gcBtn.style.cssText = 'padding: 8px 16px; background: var(--devtools-bg-tertiary); color: var(--devtools-text-primary); border: 1px solid var(--devtools-border); border-radius: 4px; cursor: pointer; font-size: 12px;';
-    
     controlsSection.appendChild(pauseBtn);
     controlsSection.appendChild(clearBtn);
     controlsSection.appendChild(gcBtn);
@@ -292,15 +288,6 @@
         drawChart();
     });
     
-    gcBtn.addEventListener('click', () => {
-        if (window.gc) {
-            window.gc();
-            window.DevToolsPlugin.utils.addConsoleEntry('Garbage collection triggered', 'info');
-        } else {
-            alert('Garbage collection not available. Run Chrome with --js-flags="--expose-gc"');
-        }
-    });
-    
     // Create the tab
     const tabId = window.DevToolsPlugin.createTab({
         name: 'Performance',
@@ -321,8 +308,4 @@
         pluginInfo.tabIds = pluginInfo.tabIds || [];
         pluginInfo.tabIds.push(tabId);
     }
-    
-    // Log success
-    window.DevToolsPlugin.utils.addConsoleEntry('Performance Monitor plugin loaded successfully', 'info');
-    
 })();
