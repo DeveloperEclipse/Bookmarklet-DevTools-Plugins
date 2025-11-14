@@ -46,10 +46,10 @@
     lineNumbers.style.cssText = 'padding: 12px 8px; background: var(--devtools-bg-tertiary); color: var(--devtools-text-tertiary); font-family: "Menlo", "Monaco", "Courier New", monospace; font-size: 12px; line-height: 18px; user-select: none; text-align: right; min-width: 30px; border-right: 1px solid var(--devtools-border);';
     
     const codeDisplay = document.createElement('pre');
-    codeDisplay.style.cssText = 'position: absolute; top: 0; left: 50px; right: 0; padding: 12px; margin: 0; background: transparent; color: var(--devtools-text-primary); font-family: "Menlo", "Monaco", "Courier New", monospace; font-size: 12px; line-height: 18px; pointer-events: none;';
+    codeDisplay.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; padding: 12px; padding-left: 62px; margin: 0; background: transparent; color: var(--devtools-text-primary); font-family: "Menlo", "Monaco", "Courier New", monospace; font-size: 12px; line-height: 18px; pointer-events: none;';
     
     const codeInput = document.createElement('textarea');
-    codeInput.style.cssText = 'flex: 1; padding: 12px; margin-left: 50px; background: transparent; color: transparent; caret-color: var(--devtools-text-primary); border: none; outline: none; font-family: "Menlo", "Monaco", "Courier New", monospace; font-size: 12px; line-height: 18px; resize: none; white-space: pre; tab-size: 4; position: relative; z-index: 1;';
+    codeInput.style.cssText = 'flex: 1; padding: 12px; padding-left: 62px; background: transparent; color: transparent; caret-color: var(--devtools-text-primary); border: none; outline: none; font-family: "Menlo", "Monaco", "Courier New", monospace; font-size: 12px; line-height: 18px; resize: none; white-space: pre; tab-size: 4; position: relative; z-index: 1;';
     codeInput.spellcheck = false;
     
     editorWrapper.appendChild(lineNumbers);
@@ -196,10 +196,7 @@
     // Create tab
     window.DevToolsPlugin.createTab({
         name: 'JS Executor',
-        content: container,
-        onActivate: () => {
-            codeInput.focus();
-        }
+        content: container
     });
     
     window.DevToolsPlugin.utils.addConsoleEntry('JS Executor plugin loaded', 'info');
