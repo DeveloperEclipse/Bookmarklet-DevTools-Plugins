@@ -15,7 +15,7 @@
     // Create header
     const header = document.createElement('div');
     header.style.cssText = 'margin-bottom: 20px;';
-    header.innerHTML = '<h3 style="margin: 0 0 8px 0; color: var(--devtools-text-primary); font-size: 18px;">Performance Monitor</h3><div style="color: var(--devtools-text-secondary); font-size: 12px;">Real-time performance metrics</div>';
+    header.innerHTML = '<h3 style="margin: 0 0 8px 0; color: var(--devtools-text-primary); font-size: 18px;">Performance Monitor</h3>';
     container.appendChild(header);
     
     // Create metrics grid
